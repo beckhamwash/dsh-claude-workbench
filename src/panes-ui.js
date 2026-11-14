@@ -2,7 +2,7 @@
  * dsh-panes UI (shared by the generated client bundle).
  *
  * Runs in a top-level Web GUI document and provides two things:
- *  - 并排会话: 2–3 same-origin frames that each behave like an extra GUI client
+ *  - Split view: 2–3 same-origin frames that each behave like an extra GUI client
  *    (independent session view, shared Host / auth / theme);
  *  - 旁聊 (side chat): a docked right-hand panel whose frame boots a fresh
  *    fork of the current session, so context is inherited but the main
@@ -124,12 +124,12 @@ export function panesUi(boot, ctx) {
     overlay.id = "dsh-panes";
     overlay.innerHTML =
       '<div class="dsh-panes-bar">' +
-      '<span class="dsh-panes-title">并排会话</span>' +
-      "<span>每个面板里可以独立打开 / 切换不同会话</span>" +
+      '<span class="dsh-panes-title">Split view</span>' +
+      "<span>并排会话 · 每个面板里可以独立打开 / 切换不同会话</span>" +
       '<span class="spacer"></span>' +
       '<button type="button" data-count="2">2 栏</button>' +
       '<button type="button" data-count="3">3 栏</button>' +
-      '<button type="button" data-close="1">退出并排</button>' +
+      '<button type="button" data-close="1">退出 Split view</button>' +
       "</div>" +
       '<div class="dsh-panes-row"></div>';
     document.body.appendChild(overlay);
@@ -138,7 +138,9 @@ export function panesUi(boot, ctx) {
     var toggle = document.createElement("button");
     toggle.id = "dsh-panes-toggle";
     toggle.type = "button";
-    toggle.textContent = "◫ 并排会话";
+    toggle.textContent = "◫ Split view";
+    toggle.title = "Split view：并排查看 2–3 个会话";
+    toggle.setAttribute("aria-label", "Split view（并排会话）");
     toggle.addEventListener("click", function () { openPanes(2); });
     document.body.appendChild(toggle);
 
@@ -151,7 +153,7 @@ export function panesUi(boot, ctx) {
       var pane = document.createElement("div");
       pane.className = "dsh-panes-pane";
       var frame = document.createElement("iframe");
-      frame.title = "并排会话";
+      frame.title = "Split view";
       pane.appendChild(frame);
       return { pane: pane, frame: frame };
     }

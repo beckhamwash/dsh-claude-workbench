@@ -1,7 +1,7 @@
 {
   "name": "dsh-claude-workbench",
-  "version": "0.1.0",
-  "description": "Claude-inspired warm workbench for the DeepSeek Harness Web GUI: cream/clay palette with Crimson Pro prose, 2–3 side-by-side conversations, selection-based side chat, and a top-right light/dark quick switch.",
+  "version": "0.1.1",
+  "description": "Claude-inspired workbench for the DeepSeek Harness Web GUI: warm editorial skin (Crimson Pro/DM Sans), split view with 2-3 side-by-side conversations, selection-based side chat, and a top-right light/dark switch.",
   "type": "module",
   "main": "lib/index.js",
   "exports": {
@@ -26,7 +26,11 @@
     "skin",
     "claude",
     "panes",
-    "side-chat"
+    "side-chat",
+    "split-view",
+    "splitview",
+    "side-by-side",
+    "claude-style"
   ],
   "license": "MIT",
   "dsh": {

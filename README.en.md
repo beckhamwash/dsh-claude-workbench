@@ -3,12 +3,12 @@
 A Claude-flavoured workbench enhancement for the **DeepSeek Harness (DSH)** Web GUI — one plugin, four features:
 
 1. **Claude skin** — warm cream canvas, warm stone surfaces and clay accents; serif **Crimson Pro** prose / **DM Sans** UI (fonts inlined, works offline), complete light/dark/system support.
-2. **Side-by-side conversations** — the “◫ 并排会话” pill at the bottom-right splits the window into 2–3 full DSH panes, each with its own session view.
+2. **Split view** — the “◫ Split view” pill at the bottom-right splits the window into 2–3 full DSH panes, each with its own session view (the same idea as Claude’s Split view).
 3. **Side chat** — select text in a conversation → right-click → **“在旁聊中提问”**; a docked right-hand panel boots a fork of the current session with the selection quoted in the composer. Closing archives the fork.
 4. **Quick appearance switch** — a theme button at the top-right of the session header toggles follow-system / light / dark (same as Settings → General → Appearance, persisted).
 
 ![Claude skin (light)](preview/light.png)
-![Side-by-side](preview/panes-2col.png)
+![Split view](preview/panes-2col.png)
 ![Side chat](preview/sidechat.png)
 ![Quick appearance switch](preview/theme-menu.png)
 
