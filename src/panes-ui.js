@@ -682,8 +682,10 @@ export function panesUi(boot, ctx) {
         initial.forEach(function (value, id) {
           chimePreviousRunning.set(id, value !== undefined && value !== null && value.running === true);
         });
-        chimeUnsubscribe = status.subscribe(function (snapshot) {
+        chimeUnsubscribe = status.subscribe(function () {
           try {
+            // Client stores notify subscribers without passing the snapshot; read it.
+            var snapshot = status.getSnapshot();
             snapshot.forEach(function (value, id) {
               onSessionRunningChanged(id, value !== undefined && value !== null && value.running === true);
             });
