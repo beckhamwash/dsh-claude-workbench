@@ -24,6 +24,10 @@ console.log(`lib/skin.css: ${(read("lib/skin.css").length / 1024).toFixed(1)} KB
 
 // --- 2. client.js: wrap the browser UI in the client-plugin bundle format ---
 const source = read("src/panes-ui.js").toString("utf8");
+const chipsSource = read("src/suggestion-chips.js").toString("utf8");
+const chipsStart = chipsSource.indexOf("export function suggestionChips(");
+if (chipsStart < 0) throw new Error("suggestionChips not found in src/suggestion-chips.js");
+const chipsFunction = chipsSource.slice(chipsStart + "export ".length).trimEnd();
 const marker = "export function panesUi(";
 const start = source.indexOf(marker);
 if (start < 0) throw new Error("panesUi not found in src/panes-ui.js");
@@ -34,8 +38,11 @@ const bundle = `window.__ModuleLoader__.load({
 \tfactory: (require) => {
 \t\tvar module = { exports: {} };
 \t\tvar exports = module.exports;
-\t\tconst inject = [];
+\t\tconst inject = ["slots", "sessions"];
+\t\tconst react = require("react");
+\t\tconst jsxRuntime = require("react/jsx-runtime");
 \t\t${functionSource}
+\t\t${chipsFunction}
 
 \t\tlet started = false;
 \t\tasync function start(ctx) {
@@ -53,6 +60,7 @@ const bundle = `window.__ModuleLoader__.load({
 
 \t\tfunction apply(ctx) {
 \t\t\tstart(ctx);
+\t\t\ttry { suggestionChips(ctx, { react: react, jsxRuntime: jsxRuntime }); } catch (error) { console.error("[claude-workbench] suggestion chips failed", error); }
 \t\t\tif (typeof ctx.effect === "function") {
 \t\t\t\tctx.effect(() => () => {
 \t\t\t\t\ttry { globalThis.__dshPanesTeardown?.(); } catch (error) { /* ignore */ }

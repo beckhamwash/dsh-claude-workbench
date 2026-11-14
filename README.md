@@ -2,13 +2,16 @@
 
 [![npm version](https://img.shields.io/npm/v/dsh-claude-workbench.svg)](https://www.npmjs.com/package/dsh-claude-workbench) [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-给 **DeepSeek Harness（DSH）Web GUI** 的 Claude 风格工作台增强包 —— 一个插件，五件事：
+给 **DeepSeek Harness（DSH）Web GUI** 的 Claude 风格工作台增强包 —— 一个插件，六件事：
 
 1. **Claude 皮肤**：暖米白画布 + 暖石灰 + 陶土色，正文/标题用衬线 **Crimson Pro**、界面用 **DM Sans**（字体已内联，离线可用），浅色/深色/跟随系统都完整适配；
 2. **Split view（并排会话）**：右下角「◫ Split view」→ 把窗口切成 **2 栏或 3 栏**，每栏是一个完整 DSH 界面，可各自打开/切换不同会话（对应 Claude 里的 Split view）；
 3. **旁聊（side chat）**：在对话里**选中文字 → 右键 → 「在旁聊中提问」**，右侧 dock 出当前会话的 fork（继承上下文），选中的内容以引用形式预填进输入框；关闭时自动归档该 fork；
 4. **外观快切**：右上角主题按钮，一键在 **跟随系统 / 浅色 / 深色** 之间切换（与「设置 → 通用 → 外观」等价、持久化）；
-5. **完成提示音**：一轮对话结束时播放一声清脆提示音（类似 OpenCode 的完成提醒），可在右上角外观菜单里开关，设置会记住。（0.1.3 修复了状态订阅不触发的问题）
+5. **完成提示音**：一轮对话结束时播放一声清脆提示音（类似 OpenCode 的完成提醒），可在右上角外观菜单里开关，设置会记住。
+6. **下一步建议（内联 chips）**：助手在消息末尾输出一个 `suggestions` 代码块（JSON 数组），插件把它渲染成**消息下方的可点按钮**，点一下直接把对应 prompt 发出去 —— 和 Claude 里的下一步建议同款。
+
+> 两种"下一步"并存：**内联 chips** 用于非阻塞的 2–3 个建议（点了直接发）；**表单**（内置 `ask_user_question` 卡片）用于需要阻塞确认的决策。
 
 ![Claude 皮肤（浅色）](preview/light.png)
 ![Split view](preview/panes-2col.png)
@@ -46,6 +49,7 @@ dsh plugin --profile web add github:<owner>/dsh-claude-workbench
 - **旁聊**：选中对话内容 → 右键 →「◧ 在旁聊中提问」；面板左缘可拖动调宽；「在主对话打开」把 fork 提为主对话；关闭自动归档 fork。
 - **外观**：会话 header 右上角按钮（右侧栏展开按钮左边），点开选 跟随系统/浅色/深色；菜单里还有「完成提示音」开关。
 - **完成提示音**：默认开启；对话完成（运行中 → 空闲）时响一声；子代理会话不响。
+- **下一步建议**：只要让我"给下一步建议"，我就会在消息末尾输出 `suggestions` 块，插件渲染成按钮；点按钮直接发送。
 
 ## 兼容性
 

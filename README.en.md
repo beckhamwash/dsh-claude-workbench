@@ -2,18 +2,20 @@
 
 [![npm version](https://img.shields.io/npm/v/dsh-claude-workbench.svg)](https://www.npmjs.com/package/dsh-claude-workbench) [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-A Claude-flavoured workbench enhancement for the **DeepSeek Harness (DSH)** Web GUI — one plugin, five features:
+A Claude-flavoured workbench enhancement for the **DeepSeek Harness (DSH)** Web GUI — one plugin, six features:
 
 1. **Claude skin** — warm cream canvas, warm stone surfaces and clay accents; serif **Crimson Pro** prose / **DM Sans** UI (fonts inlined, works offline), complete light/dark/system support.
 2. **Split view** — the “◫ Split view” pill at the bottom-right splits the window into 2–3 full DSH panes, each with its own session view (the same idea as Claude’s Split view).
 3. **Side chat** — select text in a conversation → right-click → **“在旁聊中提问”**; a docked right-hand panel boots a fork of the current session with the selection quoted in the composer. Closing archives the fork.
 4. **Quick appearance switch** — a theme button at the top-right of the session header toggles follow-system / light / dark (same as Settings → General → Appearance, persisted).
-5. **Completion chime** — a short, crisp chime when a turn finishes (like OpenCode’s completion sound); toggle it in the appearance menu and the choice is remembered. (0.1.3 fixes the status subscription that never fired.)
+5. **Completion chime** — a short, crisp chime when a turn finishes (like OpenCode’s completion sound); toggle it in the appearance menu and the choice is remembered.
+6. **Inline next-step chips** — the assistant ends a message with a `suggestions` fenced block (a JSON array); the plugin renders it as clickable chips under the message and clicking one sends its prompt directly — the Claude-style next-step buttons. Blocking choices still use the built-in `ask_user_question` form card.
 
 ![Claude skin (light)](preview/light.png)
 ![Split view](preview/panes-2col.png)
 ![Side chat](preview/sidechat.png)
 ![Quick appearance switch](preview/theme-menu.png)
+![Inline suggestions](preview/suggestions.png)
 
 > Preview images are **synthetic renders** (plugin styles + mock data), not real conversations.
 
