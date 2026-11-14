@@ -8,7 +8,7 @@ A Claude-flavoured workbench enhancement for the **DeepSeek Harness (DSH)** Web 
 2. **Split view** — the “◫ Split view” pill at the bottom-right splits the window into 2–3 full DSH panes, each with its own session view (the same idea as Claude’s Split view).
 3. **Side chat** — select text in a conversation → right-click → **“在旁聊中提问”**; a docked right-hand panel boots a fork of the current session with the selection quoted in the composer. Closing archives the fork.
 4. **Quick appearance switch** — a theme button at the top-right of the session header toggles follow-system / light / dark (same as Settings → General → Appearance, persisted).
-5. **Completion chime** — a short, crisp chime when a turn finishes (like OpenCode’s completion sound); toggle it in the appearance menu and the choice is remembered.
+5. **Completion chime** — a short, crisp chime when a turn finishes (like OpenCode’s completion sound); toggle it in the appearance menu, adjust its **volume** with the slider (0–250%, default 150%, previews while dragging), and the choice is remembered.
 6. **Inline next-step chips** — the assistant ends a message with a `suggestions` fenced block (a JSON array); the plugin renders it as clickable chips under the message and clicking one sends its prompt directly — the Claude-style next-step buttons. Blocking choices still use the built-in `ask_user_question` form card.
 
 ![Claude skin (light)](preview/light.png)
