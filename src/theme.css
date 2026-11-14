@@ -1,0 +1,270 @@
+/* ==========================================================================
+   dsh-claude-skin — Claude 风格皮肤（暖米白 / 陶土色 / 衬线正文）
+   通过 webserver 的 index 注入挂载为 <style>，只覆盖设计 token 与排版 token，
+   不改任何组件逻辑。字体以 base64 内联（Crimson Pro / DM Sans，OFL 授权）。
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   0. 根级：字体栈、品牌字体、焦点环
+   -------------------------------------------------------------------------- */
+:root {
+  --dsh-claude-serif: "Crimson Pro", "Iowan Old Style", "Palatino Linotype", Palatino,
+    Charter, Georgia, "Songti SC", "STSong", "Hiragino Mincho ProN", serif;
+  --dsh-claude-sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+
+  /* 界面无衬线字体（用户若在设置里显式选了正文字体，仍以用户设置为先） */
+  --dsh-font-family-text-default: var(--dsh-claude-sans) !important;
+
+  /* 品牌字 / 欢迎页文字改用衬线，接近 Claude 的 editorial 气质 */
+  --dsw-font-family-brand: var(--dsh-claude-serif) !important;
+
+  /* 焦点环改成陶土色 */
+  --dsw-focus-ring-color: #d97757 !important;
+  --dsw-focus-ring-width: 2px !important;
+}
+
+/* --------------------------------------------------------------------------
+   1. 静态色板：整套 neutral-bluish 灰阶换成 Claude 的暖石灰色阶；
+      deepseek 品牌蓝阶换成陶土色阶（clay）。浅色/深色共用同一阶梯。
+   -------------------------------------------------------------------------- */
+body {
+  --dsw-static-neutral-bluish-00: #fbfaf6 !important;
+  --dsw-static-neutral-bluish-50: #f6f4ec !important;
+  --dsw-static-neutral-bluish-55: #f2efe6 !important;
+  --dsw-static-neutral-bluish-60: #eeebe1 !important;
+  --dsw-static-neutral-bluish-75: #e9e5d9 !important;
+  --dsw-static-neutral-bluish-90: #e4dfd2 !important;
+  --dsw-static-neutral-bluish-100: #ded8ca !important;
+  --dsw-static-neutral-bluish-150: #d7d0c1 !important;
+  --dsw-static-neutral-bluish-200: #cdc5b3 !important;
+  --dsw-static-neutral-bluish-300: #bbb2a0 !important;
+  --dsw-static-neutral-bluish-310: #b0a693 !important;
+  --dsw-static-neutral-bluish-400: #8a8374 !important;
+  --dsw-static-neutral-bluish-500: #78705e !important;
+  --dsw-static-neutral-bluish-600: #665e4e !important;
+  --dsw-static-neutral-bluish-700: #494336 !important;
+  --dsw-static-neutral-bluish-750: #3c362c !important;
+  --dsw-static-neutral-bluish-800: #302b22 !important;
+  --dsw-static-neutral-bluish-850: #26221b !important;
+  --dsw-static-neutral-bluish-875: #1f1c17 !important;
+  --dsw-static-neutral-bluish-900: #1a1815 !important;
+  --dsw-static-neutral-bluish-950: #151515 !important;
+  --dsw-static-neutral-bluish-1000: #141413 !important;
+
+  --dsw-static-deepseek-50: #f3f0e8 !important;
+  --dsw-static-deepseek-100: #efe3d8 !important;
+  --dsw-static-deepseek-200: #e7d3c5 !important;
+  --dsw-static-deepseek-300: #e9b79b !important;
+  --dsw-static-deepseek-400: #e08a63 !important;
+  --dsw-static-deepseek-450: #d97757 !important;
+  --dsw-static-deepseek-500: #c6613f !important;
+  --dsw-static-deepseek-600: #a94e30 !important;
+  --dsw-static-deepseek-700-delete: #8c3f26 !important;
+  --dsw-static-deepseek-800: #6b3220 !important;
+  --dsw-static-deepseek-900: #3f2a20 !important;
+
+  /* 纯灰阶（行内代码、滚动条、无效态等）也一并暖化 */
+  --dsw-static-neutral-00: #ffffff !important;
+  --dsw-static-neutral-50: #f7f5ef !important;
+  --dsw-static-neutral-100: #f2efe7 !important;
+  --dsw-static-neutral-150: #ece8de !important;
+  --dsw-static-neutral-200: #e5e0d4 !important;
+  --dsw-static-neutral-250: #ded8ca !important;
+  --dsw-static-neutral-300: #d2ccbc !important;
+  --dsw-static-neutral-400: #a19a8c !important;
+  --dsw-static-neutral-500: #857f71 !important;
+  --dsw-static-neutral-550: #797365 !important;
+  --dsw-static-neutral-600: #6a6458 !important;
+  --dsw-static-neutral-700: #4b463c !important;
+  --dsw-static-neutral-800: #3a352c !important;
+  --dsw-static-neutral-850: #2e2a24 !important;
+  --dsw-static-neutral-900: #1c1a15 !important;
+  --dsw-static-neutral-1000: #0b0a08 !important;
+}
+
+/* 首帧（客户端样式加载前）就用暖米白/暖黑，避免白闪 */
+body:not([data-ds-dark-theme]) {
+  background-color: #fbfaf6 !important;
+  --dsh-boot-bg: #fbfaf6 !important;
+}
+body[data-ds-dark-theme] {
+  background-color: #151515 !important;
+  --dsh-boot-bg: #151515 !important;
+}
+
+/* --------------------------------------------------------------------------
+   2. 浅色主题别名覆盖
+   -------------------------------------------------------------------------- */
+body:not([data-ds-dark-theme]) {
+  --dsw-alias-bg-base: #fbfaf6 !important;
+  --dsw-alias-bg-layer-1: #fffdf9 !important;
+  --dsw-alias-bg-layer-2: #fffdf9 !important;
+  --dsw-alias-bg-layer-3: #fffdf9 !important;
+  --dsw-alias-bg-document-preview: #f5f2ea !important;
+  --dsw-alias-bg-document-selection: color-mix(in srgb, #d97757 30%, transparent) !important;
+  --dsw-alias-bg-mask-drop: #fcfcfbd9 !important;
+  --dsw-alias-bg-module-platform: #f0ede3 !important;
+  --dsw-alias-bg-multi-select: #f0ede3 !important;
+  --dsw-alias-bg-overlay: #e7e2d5 !important;
+
+  --dsw-alias-interactive-bg-hover: #2f2b2412 !important;
+  --dsw-alias-interactive-bg-active: #2f2b241f !important;
+  --dsw-alias-interactive-bg-hover-accent: #c6613f24 !important;
+  --dsw-alias-interactive-bg-hover-solid: #eeeadf !important;
+
+  --dsw-alias-markdown-code-block: #f4f1e8 !important;
+  --dsw-alias-markdown-code-block-banner: #efeade !important;
+  --dsw-alias-markdown-inline-code: #f1ede2 !important;
+  --dsw-alias-markdown-citation: #efeade !important;
+  --dsw-alias-markdown-tag: #efeade !important;
+  --dsw-alias-markdown-code-segment-selected: #fffdf9 !important;
+  --dsw-alias-markdown-code-segment-unselected: #f4f1e8 !important;
+
+  --dsw-alias-link: #b4552f !important;
+  --dsw-alias-label-caption: #8b8578 !important;
+  --dsw-alias-label-primary-bluish: #8c3f26 !important;
+  --dsw-alias-brand-primary-new-colorprimary-new-color: #c6613f !important;
+  --dsw-alias-state-business-primary: #c6613f !important;
+  --dsw-alias-state-business-tertiary: #f5e9e0 !important;
+
+  --dsw-menu-surface-fill: #fbfaf6d9 !important;
+  --dsw-alias-menu-group-header-fill: #f6f3ecf0 !important;
+  --dsw-specific-menu: var(--dsw-menu-surface-fill) !important;
+  --dsw-specific-input-major: #fffdf9 !important;
+  --dsw-specific-bubble: #f1ede4 !important;
+  --dsw-specific-bubble-highlight: #e6dfd0 !important;
+  --dsw-specific-sidebar-nav-item-active: #ece8dc !important;
+  --dsw-specific-sidebar-nav-item-active-accent: #efe3d9 !important;
+  --dsw-specific-selector: #eeebe1 !important;
+  --dsw-specific-tip: #eeebe1 !important;
+
+  --dsw-alias-scrollbar-bg-l1: #dcd6c8 !important;
+  --dsw-alias-scrollbar-bg-l2: #dcd6c8 !important;
+  --dsw-alias-scrollbar-hover-l1: #c9c2b1 !important;
+  --dsw-alias-scrollbar-hover-l2: #c9c2b1 !important;
+
+  --dsw-alias-file-diff-added-bg: #e9f2e2 !important;
+  --dsw-alias-file-diff-added-gutter: #f0f7eb !important;
+  --dsw-alias-file-diff-deleted-bg: #f9e9e0 !important;
+  --dsw-alias-file-diff-deleted-gutter: #fcf1ea !important;
+
+  --dsw-alias-onboarding-accent: #d97757 !important;
+  --dsw-linear-gradient-think: linear-gradient(180deg, #fbfaf6 20.19%, #fbfaf600 100%) !important;
+  --dsw-linear-think-select: linear-gradient(180deg, #f1ede2 20.19%, #f1ede200 100%) !important;
+}
+
+/* --------------------------------------------------------------------------
+   3. 深色主题别名覆盖（Claude 的暖黑 + 陶土）
+   -------------------------------------------------------------------------- */
+body[data-ds-dark-theme] {
+  --dsw-alias-bg-base: #151515 !important;
+  --dsw-alias-bg-layer-1: #1c1b19 !important;
+  --dsw-alias-bg-layer-2: #232220 !important;
+  --dsw-alias-bg-layer-3: #2b2926 !important;
+  --dsw-alias-bg-document-preview: #1a1917 !important;
+  --dsw-alias-bg-document-selection: color-mix(in srgb, #d97757 35%, transparent) !important;
+  --dsw-alias-bg-mask-drop: #232220c4 !important;
+  --dsw-alias-bg-module-platform: #2e2b26 !important;
+  --dsw-alias-bg-multi-select: #2b2926 !important;
+  --dsw-alias-bg-overlay: #3a3630 !important;
+
+  --dsw-alias-interactive-bg-hover: #ffffff12 !important;
+  --dsw-alias-interactive-bg-active: #ffffff1f !important;
+  --dsw-alias-interactive-bg-hover-accent: #d9775730 !important;
+  --dsw-alias-interactive-bg-hover-solid: #302d28 !important;
+
+  --dsw-alias-markdown-code-block: #1d1c19 !important;
+  --dsw-alias-markdown-code-block-banner: #242220 !important;
+  --dsw-alias-markdown-inline-code: #2a2724 !important;
+  --dsw-alias-markdown-citation: #262320 !important;
+  --dsw-alias-markdown-tag: #26231f !important;
+  --dsw-alias-markdown-code-segment-selected: #302d28 !important;
+  --dsw-alias-markdown-code-segment-unselected: #1d1c19 !important;
+
+  --dsw-alias-link: #e09a7c !important;
+  --dsw-alias-label-caption: #8b8578 !important;
+  --dsw-alias-label-primary-bluish: #f2efe7 !important;
+  --dsw-alias-brand-primary-new-colorprimary-new-color: #d97757 !important;
+  --dsw-alias-state-business-primary: #e08a63 !important;
+  --dsw-alias-state-business-tertiary: #3f2a20 !important;
+
+  --dsw-menu-surface-fill: #262420c9 !important;
+  --dsw-alias-menu-group-header-fill: #262420f0 !important;
+  --dsw-specific-menu: var(--dsw-menu-surface-fill) !important;
+  --dsw-specific-input-major: #232220 !important;
+  --dsw-specific-bubble: #2b2825 !important;
+  --dsw-specific-bubble-highlight: #3a352f !important;
+  --dsw-specific-sidebar-nav-item-active: #302d28 !important;
+  --dsw-specific-sidebar-nav-item-active-accent: #3b3029 !important;
+  --dsw-specific-selector: #2e2b26 !important;
+  --dsw-specific-tip: #2e2b26 !important;
+  --dsw-specific-login-input: #1a1917 !important;
+
+  --dsw-alias-scrollbar-bg-l1: #3a362e !important;
+  --dsw-alias-scrollbar-bg-l2: #332f28 !important;
+  --dsw-alias-scrollbar-hover-l1: #4a453c !important;
+  --dsw-alias-scrollbar-hover-l2: #565045 !important;
+
+  --dsw-alias-file-diff-added-bg: #1e2b21 !important;
+  --dsw-alias-file-diff-added-gutter: #16211a !important;
+  --dsw-alias-file-diff-deleted-bg: #2e1d18 !important;
+  --dsw-alias-file-diff-deleted-gutter: #241612 !important;
+
+  --dsw-alias-onboarding-accent: #e08a63 !important;
+  --dsw-linear-gradient-think: linear-gradient(180deg, #151515 20.19%, #15151500 100%) !important;
+  --dsw-linear-think-select: linear-gradient(180deg, #2b2926 20.19%, #2b292600 100%) !important;
+}
+
+/* --------------------------------------------------------------------------
+   4. 排版：对话正文/标题 / 列表 / 表格改用衬线（Crimson Pro），界面仍为无衬线
+   -------------------------------------------------------------------------- */
+body {
+  --dsw-font-markdown-base: var(--dsh-content-font-size, 14px) / calc(24px + var(--dsh-content-font-delta)) var(--dsh-claude-serif) !important;
+  --dsw-font-markdown-base-font-family: var(--dsh-claude-serif) !important;
+  --dsw-font-markdown-base-strong: 600 var(--dsh-content-font-size, 14px) / calc(24px + var(--dsh-content-font-delta)) var(--dsh-claude-serif) !important;
+  --dsw-font-markdown-base-strong-font-family: var(--dsh-claude-serif) !important;
+  --dsw-font-markdown-base-italic: italic var(--dsh-content-font-size, 14px) / calc(24px + var(--dsh-content-font-delta)) var(--dsh-claude-serif) !important;
+  --dsw-font-markdown-base-italic-font-family: var(--dsh-claude-serif) !important;
+  --dsw-font-markdown-base-strong-italic: italic 600 var(--dsh-content-font-size, 14px) / calc(24px + var(--dsh-content-font-delta)) var(--dsh-claude-serif) !important;
+  --dsw-font-markdown-base-strong-italic-font-family: var(--dsh-claude-serif) !important;
+
+  --dsw-font-markdown-h1: 600 calc(21px + var(--dsh-content-font-delta)) / calc(30px + var(--dsh-content-font-delta)) var(--dsh-claude-serif) !important;
+  --dsw-font-markdown-h1-font-family: var(--dsh-claude-serif) !important;
+  --dsw-font-markdown-h2: 600 calc(19px + var(--dsh-content-font-delta)) / calc(28px + var(--dsh-content-font-delta)) var(--dsh-claude-serif) !important;
+  --dsw-font-markdown-h2-font-family: var(--dsh-claude-serif) !important;
+  --dsw-font-markdown-h3: 600 calc(18px + var(--dsh-content-font-delta)) / calc(26px + var(--dsh-content-font-delta)) var(--dsh-claude-serif) !important;
+  --dsw-font-markdown-h3-font-family: var(--dsh-claude-serif) !important;
+  --dsw-font-markdown-h4: 600 var(--dsh-content-font-size, 14px) / calc(24px + var(--dsh-content-font-delta)) var(--dsh-claude-serif) !important;
+  --dsw-font-markdown-h4-font-family: var(--dsh-claude-serif) !important;
+
+  --dsw-font-markdown-table: var(--dsh-content-font-size-secondary, 13px) / calc(22px + var(--dsh-content-font-delta-secondary, 0px)) var(--dsh-claude-serif) !important;
+  --dsw-font-markdown-table-font-family: var(--dsh-claude-serif) !important;
+  --dsw-font-markdown-table-head: 500 var(--dsh-content-font-size-secondary, 13px) / calc(22px + var(--dsh-content-font-delta-secondary, 0px)) var(--dsh-claude-serif) !important;
+  --dsw-font-markdown-table-head-font-family: var(--dsh-claude-serif) !important;
+
+  --dsw-font-markdown-small: 12px / 20px var(--dsh-claude-serif) !important;
+  --dsw-font-markdown-small-font-family: var(--dsh-claude-serif) !important;
+  --dsw-font-markdown-small-strong: 600 12px / 20px var(--dsh-claude-serif) !important;
+  --dsw-font-markdown-small-strong-font-family: var(--dsh-claude-serif) !important;
+  --dsw-font-markdown-small-italic: italic 12px / 20px var(--dsh-claude-serif) !important;
+  --dsw-font-markdown-small-italic-font-family: var(--dsh-claude-serif) !important;
+  --dsw-font-markdown-small-strong-italic: italic 600 12px / 20px var(--dsh-claude-serif) !important;
+  --dsw-font-markdown-small-strong-italic-font-family: var(--dsh-claude-serif) !important;
+}
+
+/* 用户消息气泡也用衬线（类名为当前构建的哈希名，匹配不到时无副作用） */
+._bubble_1sgyj_1 {
+  font-family: var(--dsh-claude-serif) !important;
+}
+
+/* --------------------------------------------------------------------------
+   5. 对话区宽度：默认是 clamp(680px, 列宽 × .64, 920px)，比 Claude 的阅读栏窄。
+      抬到 clamp(820px, 列宽 × .78, 1000px)；左右边缘的拖拽手柄仍然优先
+      （拖拽写入的 --dsh-chat-user-width 会覆盖这里的默认值）。
+   -------------------------------------------------------------------------- */
+.kiGsTW_body {
+  --dsh-chat-content-width: var(--dsh-chat-user-width,
+    clamp(820px, calc(var(--dsh-conversation-column-width, 0px) * .78), 1000px)) !important;
+}
