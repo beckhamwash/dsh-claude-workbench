@@ -1,5 +1,7 @@
 # dsh-claude-workbench
 
+[![npm version](https://img.shields.io/npm/v/dsh-claude-workbench.svg)](https://www.npmjs.com/package/dsh-claude-workbench) [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 给 **DeepSeek Harness（DSH）Web GUI** 的 Claude 风格工作台增强包 —— 一个插件，四件事：
 
 1. **Claude 皮肤**：暖米白画布 + 暖石灰 + 陶土色，正文/标题用衬线 **Crimson Pro**、界面用 **DM Sans**（字体已内联，离线可用），浅色/深色/跟随系统都完整适配；

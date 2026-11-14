@@ -1,5 +1,7 @@
 # dsh-claude-workbench
 
+[![npm version](https://img.shields.io/npm/v/dsh-claude-workbench.svg)](https://www.npmjs.com/package/dsh-claude-workbench) [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 A Claude-flavoured workbench enhancement for the **DeepSeek Harness (DSH)** Web GUI — one plugin, four features:
 
 1. **Claude skin** — warm cream canvas, warm stone surfaces and clay accents; serif **Crimson Pro** prose / **DM Sans** UI (fonts inlined, works offline), complete light/dark/system support.
