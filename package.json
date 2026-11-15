@@ -1,6 +1,6 @@
 {
   "name": "dsh-claude-workbench",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Claude-inspired workbench for the DeepSeek Harness Web GUI: warm editorial skin (Crimson Pro/DM Sans), split view with 2-3 side-by-side conversations, selection-based side chat, a top-right light/dark switch, and a completion chime when a turn finishes.",
   "type": "module",
   "main": "lib/index.js",

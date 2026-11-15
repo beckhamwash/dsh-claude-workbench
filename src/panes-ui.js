@@ -120,13 +120,13 @@ export function panesUi(boot, ctx) {
       '#dsh-sidechat-menu button{display:flex;align-items:center;gap:8px;width:100%;height:30px;padding:0 9px;border:0;border-radius:6px;background:transparent;color:var(--dsw-alias-label-primary,#111);font:500 12px/1 var(--dsw-font-family,system-ui);cursor:pointer;text-align:left}',
       '#dsh-sidechat-menu button:hover{background:var(--dsw-alias-interactive-bg-hover,#00000012)}',
       '#dsh-sidechat-menu .dsh-ctx-icon{width:16px;text-align:center;color:var(--dsw-alias-label-tertiary,#888)}',
-      '#dsh-suggestions,.dsh-suggestions{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:12px 0 4px}',
-      '.dsh-suggestions button{display:inline-flex;align-items:center;gap:8px;min-height:32px;padding:0 12px;border-radius:8px;border:1px solid var(--dsw-alias-border-l3,#0002);background:var(--dsw-alias-bg-layer-1,#fff);color:var(--dsw-alias-label-primary,#111);font:500 13px/1.2 var(--dsw-font-family,system-ui);cursor:pointer;transition:background .15s ease,border-color .15s ease,opacity .15s ease}',
+      '#dsh-suggestions,.dsh-suggestions{display:flex;flex-wrap:wrap;align-items:center;gap:.5em;margin:1em 0 .35em}',
+      '.dsh-suggestions button{display:inline-flex;align-items:center;gap:.5em;min-height:2.4em;padding:.45em 1em;border-radius:.5em;border:1px solid var(--dsw-alias-border-l3,#0002);background:var(--dsw-alias-bg-layer-1,#fff);color:var(--dsw-alias-label-primary,#111);font-family:var(--dsw-font-family,system-ui);font-weight:500;font-size:.95em;line-height:1.3;cursor:pointer;transition:background .15s ease,border-color .15s ease,opacity .15s ease}',
       '.dsh-suggestions button:hover{background:var(--dsw-alias-interactive-bg-hover,#00000010);border-color:var(--dsw-alias-border-l2,#0003)}',
       '.dsh-suggestions button.dsh-suggestion-primary{background:var(--dsw-alias-label-primary,#141413);color:var(--dsw-alias-bg-base,#fbfaf6);border-color:transparent}',
       '.dsh-suggestions button.dsh-suggestion-primary:hover{background:var(--dsw-alias-label-primary,#141413);opacity:.92}',
       '.dsh-suggestions[data-sent="1"] button{opacity:.55;pointer-events:none}',
-      '.dsh-suggestions .dsh-suggestion-hint{font:500 11px/1 var(--dsw-font-family-code,ui-monospace,SFMono-Regular,monospace);opacity:.6}'
+      '.dsh-suggestions .dsh-suggestion-hint{font-family:var(--dsw-font-family-code,ui-monospace,SFMono-Regular,monospace);font-weight:500;font-size:.72em;line-height:1;opacity:.6}'
     ].join("\n");
     document.head.appendChild(style);
     document.body.setAttribute("data-dsh-sidechat", "0");
